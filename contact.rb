@@ -1,3 +1,5 @@
+require 'pry'
+
 class Contact
 
   @@contacts = []
@@ -26,11 +28,7 @@ class Contact
     @last_name
   end
 
-  def full_name
-    "#{first_name} #{last_name}"
-  end
-
-  def id
+  def id_number
     @id
   end
 
@@ -72,13 +70,19 @@ class Contact
 
   # This method should accept an id as an argument
   # and return the contact who has that id
-  def self.find
-    @@contacts.include?(id)
-      if id = @id
-        puts full_name
+  def self.find(id_num)
+    found_contact = false
+    @@contacts.each do |contact|
+      if contact.id_number == id_num
+        puts contact.full_name
+        found_contact = true
       end
     end
+    if !found_contact
+      puts "Contact not found."
+    end
   end
+
 
   # This method should allow you to specify
   # 1. which of the contact's attributes you want to update
@@ -93,9 +97,9 @@ class Contact
   # by specifying both the name of the attribute and the value
   # eg. searching for 'first_name', 'Betty' should return the first contact named Betty
   def self.find_by(first_name = nil, last_name = nil)
-    if @@contacts.include?(first_name, last_name, email)
-      puts full_name
-    end
+    # if @@contacts.include?(first_name, last_name, email)
+    #   puts full_name
+    # end
   end
 
   # This method should delete all of the contacts
@@ -104,7 +108,7 @@ class Contact
   end
 
   def full_name
-
+    return "#{@first_name} #{@last_name}"
   end
 
   # This method should delete the contact
@@ -113,7 +117,7 @@ class Contact
 
   end
   # Feel free to add other methods here, if you need them.
-
+end
 
 
 
@@ -121,3 +125,6 @@ michelle_cinello = Contact.create('Michelle', 'Cinello', 'm.cinello@gmail.com')
 random_person = Contact.create('Random', 'Person', 'random.person@gmail.com')
 
 puts Contact.all.inspect
+puts Contact.find(1)
+puts Contact.find(2)
+puts Contact.find(3)
