@@ -39,7 +39,7 @@ class CRM
   end
 
   def add_new_contact
-    print 'Enter First Name: '
+  print 'Enter First Name: '
   first_name = gets.chomp
 
   print 'Enter Last Name: '
@@ -52,22 +52,28 @@ class CRM
   note = gets.chomp
 
   Contact.create(first_name, last_name, email, note)
+
     end
 
   def modify_existing_contact
-
+    print "Which user would you like to change?"
+    current_user = gets.chomp
   end
 
   def delete_contact
+    print "Type id of person you'd like to remove"
+    id = gets.to_i
 
+    contact = Contact.find(id)
+    contact.delete
   end
 
   def display_all_contacts
-
+    puts Contact.all.inspect
   end
 
   def search_by_attribute
-
+  Contact.find_by
   end
 
 
