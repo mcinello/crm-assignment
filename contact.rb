@@ -53,8 +53,6 @@ class Contact
     @note = note
   end
 
-
-
   # This method should call the initializer,
   # store the newly created contact, and then return it
   def self.create(first_name, last_name, email, note='N/A')
@@ -121,7 +119,7 @@ class Contact
   # This method should delete the contact
   # HINT: Check the Array class docs for built-in methods that might be useful here
   def delete
-
+     @@contacts.delete(self)
   end
   # Feel free to add other methods here, if you need them.
 end
@@ -132,14 +130,14 @@ michelle_cinello = Contact.create('Michelle', 'Cinello', 'm.cinello@gmail.com')
 random_person = Contact.create('Random', 'Person', 'random.person@gmail.com')
 
 puts Contact.all.inspect
-puts Contact.find(1)
-puts Contact.find(2)
-puts Contact.find(3)
+# puts Contact.find(1)
+# puts Contact.find(2)
+# puts Contact.find(3)
 
-puts Contact.find_by("Michelle")
-puts Contact.find_by(nil, "Person")
-puts Contact.find_by("Mimo")
+# puts Contact.find_by("Michelle")
+# puts Contact.find_by(nil, "Person")
+# puts Contact.find_by("Mimo")
 
-Contact.delete_all
+random_person.delete
 
 puts Contact.all.inspect
