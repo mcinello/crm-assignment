@@ -111,7 +111,7 @@ class Contact
 
   # This method should delete all of the contacts
   def self.delete_all
-
+    @@contacts.clear
   end
 
   def full_name
@@ -132,10 +132,14 @@ michelle_cinello = Contact.create('Michelle', 'Cinello', 'm.cinello@gmail.com')
 random_person = Contact.create('Random', 'Person', 'random.person@gmail.com')
 
 puts Contact.all.inspect
-# puts Contact.find(1)
-# puts Contact.find(2)
-# puts Contact.find(3)
+puts Contact.find(1)
+puts Contact.find(2)
+puts Contact.find(3)
 
 puts Contact.find_by("Michelle")
 puts Contact.find_by(nil, "Person")
 puts Contact.find_by("Mimo")
+
+Contact.delete_all
+
+puts Contact.all.inspect
