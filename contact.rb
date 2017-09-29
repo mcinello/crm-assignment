@@ -4,12 +4,12 @@ class Contact
   @@id = 1
 
   # This method should initialize the contact's attributes
-  def initialize(first_name, last_name, email, note)
+  def initialize(first_name, last_name, email, note = 'N/A')
     @first_name = first_name
     @last_name = last_name
     @email = email
     @note = note
-    @id = @@idd
+    @id = @@id
     @@id += 1
   end
 
@@ -18,7 +18,39 @@ class Contact
       @email
   end
 
+  def first_name
+    @first_name
+  end
+
+  def last_name
+    @last_name
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def id
+    @id
+  end
+
+  def note
+    @note
+  end
+
   #SETTER
+  def email=(email)
+    @email = email
+  end
+
+  def first_name=(first_name)
+    @first_name = email
+  end
+
+  def last_name=(last_name)
+    @last_name = last_name
+  end
+
   def note=(note)
     @note = note
   end
@@ -27,21 +59,25 @@ class Contact
 
   # This method should call the initializer,
   # store the newly created contact, and then return it
-  def self.create(first_name, last_name, email, note)
-    new contact = Contact.new(first_name, last_name, email, note)
+  def self.create(first_name, last_name, email, note='N/A')
+    new_contact = Contact.new(first_name, last_name, email, note)
     @@contacts << new_contact
     return new_contact
   end
 
   # This method should return all of the existing contacts
   def self.all
-
+    @@contacts
   end
 
   # This method should accept an id as an argument
   # and return the contact who has that id
   def self.find
-
+    @@contacts.include?(id)
+      if id = @id
+        puts full_name
+      end
+    end
   end
 
   # This method should allow you to specify
@@ -56,8 +92,10 @@ class Contact
   # but it should allow you to search for a contact using attributes other than id
   # by specifying both the name of the attribute and the value
   # eg. searching for 'first_name', 'Betty' should return the first contact named Betty
-  def self.find_by
-
+  def self.find_by(first_name = nil, last_name = nil)
+    if @@contacts.include?(first_name, last_name, email)
+      puts full_name
+    end
   end
 
   # This method should delete all of the contacts
@@ -74,7 +112,12 @@ class Contact
   def delete
 
   end
-
   # Feel free to add other methods here, if you need them.
 
-end
+
+
+
+michelle_cinello = Contact.create('Michelle', 'Cinello', 'm.cinello@gmail.com')
+random_person = Contact.create('Random', 'Person', 'random.person@gmail.com')
+
+puts Contact.all.inspect
