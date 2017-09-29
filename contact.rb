@@ -72,7 +72,7 @@ class Contact
     found_contact = false
     @@contacts.each do |contact|
       if contact.id_number == id_num
-        puts contact.full_name
+        puts contact.all_info
         found_contact = true
       end
     end
@@ -86,8 +86,16 @@ class Contact
   # 1. which of the contact's attributes you want to update
   # 2. the new value for that attribute
   # and then make the appropriate change to the contact
-  def update
-
+  def update(attribute, new_value)
+    if attribute == @first_name
+      @first_name = new_value
+    elsif attribute == @last_name
+      @last_name = new_value
+    elsif attribute == @email
+      @email = new_value
+    elsif attribute == @note
+      @note = new_value
+    end
   end
 
   # This method should work similarly to the find method above
@@ -98,7 +106,7 @@ class Contact
     found_contact = false
     @@contacts.each do |contact|
       if contact.first_name == f_name || contact.last_name == l_name
-        puts contact.full_name
+        puts contact.all_info
         found_contact = true
       end
     end
@@ -112,8 +120,8 @@ class Contact
     @@contacts.clear
   end
 
-  def full_name
-    return "#{@first_name} #{@last_name}"
+  def all_info
+    return "Name: #{@first_name} #{@last_name} \nEmail: #{@email} \nNotes: #{@notes}"
   end
 
   # This method should delete the contact
@@ -130,14 +138,18 @@ michelle_cinello = Contact.create('Michelle', 'Cinello', 'm.cinello@gmail.com')
 random_person = Contact.create('Random', 'Person', 'random.person@gmail.com')
 
 puts Contact.all.inspect
-# puts Contact.find(1)
-# puts Contact.find(2)
-# puts Contact.find(3)
+puts Contact.find(1)
+puts Contact.find(2)
+puts Contact.find(3)
 
 # puts Contact.find_by("Michelle")
-# puts Contact.find_by(nil, "Person")
+puts Contact.find_by(nil, "Person")
 # puts Contact.find_by("Mimo")
 
-random_person.delete
+random_person.update("Random", "Nick")
+
+puts random_person.all_info
+#
+# random_person.delete
 
 puts Contact.all.inspect
