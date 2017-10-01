@@ -26,38 +26,47 @@ class CRM
 
   def call_option(user_selected)
     case user_selected
-  when 1 then add_new_contact
-  when 2 then modify_existing_contact
-  when 3 then delete_contact
-  when 4 then display_all_contacts
-  when 5 then search_by_attribute
-  when 6 then abort("Goodbye!")
-  # Finish off the rest for 3 through 6
-  # To be clear, the methods add_new_contact and modify_existing_contact
-  # haven't been implemented yet
-  end
+      when 1 then add_new_contact
+      when 2 then modify_existing_contact
+      when 3 then delete_contact
+      when 4 then display_all_contacts
+      when 5 then search_by_attribute
+      when 6 then abort("Goodbye!")
+      # Finish off the rest for 3 through 6
+      # To be clear, the methods add_new_contact and modify_existing_contact
+      # haven't been implemented yet
+    end
   end
 
   def add_new_contact
-  print 'Enter First Name: '
-  first_name = gets.chomp
+    print 'Enter First Name: '
+    first_name = gets.chomp
 
-  print 'Enter Last Name: '
-  last_name = gets.chomp
+    print 'Enter Last Name: '
+    last_name = gets.chomp
 
-  print 'Enter Email Address: '
-  email = gets.chomp
+    print 'Enter Email Address: '
+    email = gets.chomp
 
-  print 'Enter a Note: '
-  note = gets.chomp
+    print 'Enter a Note: '
+    note = gets.chomp
 
-  Contact.create(first_name, last_name, email, note)
+    Contact.create(first_name, last_name, email, note)
 
-    end
+  end
 
   def modify_existing_contact
-    print "Which user would you like to change?"
-    current_user = gets.chomp
+    print "Select contact you wish to change."
+    contact = gets.chomp
+
+    Contact.find_by(contact)
+
+    puts '[1] First name'
+    puts '[2] Last name'
+    puts '[3] Email'
+    puts '[4] Notes'
+    puts 'Enter a number: '
+
   end
 
   def delete_contact
