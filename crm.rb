@@ -92,7 +92,9 @@ class CRM
   end
 
   def search_by_attribute
-  Contact.find_by
+    print "Type in the first name, last name, or email of contact: "
+    contact_attribute = gets.chomp
+    Contact.find_by(contact_attribute)
   end
 
 

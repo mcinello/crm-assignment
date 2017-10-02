@@ -17,7 +17,7 @@ class Contact
 
   #GETTER
   def email
-      @email
+    @email
   end
 
   def first_name
@@ -42,7 +42,7 @@ class Contact
   end
 
   def first_name=(first_name)
-    @first_name = email
+    @first_name = first_name
   end
 
   def last_name=(last_name)
@@ -103,10 +103,10 @@ class Contact
   # but it should allow you to search for a contact using attributes other than id
   # by specifying both the name of the attribute and the value
   # eg. searching for 'first_name', 'Betty' should return the first contact named Betty
-  def self.find_by(f_name = nil, l_name = nil)
+  def self.find_by(search_query)
     found_contact = false
     @@contacts.each do |contact|
-      if contact.first_name == f_name || contact.last_name == l_name
+      if contact.first_name.casecmp(search_query) == 0 || contact.last_name.casecmp(search_query) == 0 || contact.email.casecmp(search_query) == 0
         puts contact.all_info
         found_contact = true
         return contact
