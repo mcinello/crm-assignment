@@ -4,7 +4,12 @@ require 'mini_record'
 
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'crm.sqlite3')
 
-class Contact
+class Contact < ActiveRecord::Base
+
+field :first_name, as: :string
+field :last_name,  as: :string
+field :email,      as: :string
+field :note,       as: :text
 
   @@contacts = []
   @@id = 1
@@ -19,43 +24,7 @@ class Contact
     @@id += 1
   end
 
-  #GETTER
-  def email
-    @email
-  end
 
-  def first_name
-    @first_name
-  end
-
-  def last_name
-    @last_name
-  end
-
-  def id_number
-    @id
-  end
-
-  def note
-    @note
-  end
-
-  #SETTER
-  def email=(email)
-    @email = email
-  end
-
-  def first_name=(first_name)
-    @first_name = first_name
-  end
-
-  def last_name=(last_name)
-    @last_name = last_name
-  end
-
-  def note=(note)
-    @note = note
-  end
 
   # This method should call the initializer,
   # store the newly created contact, and then return it
@@ -126,8 +95,12 @@ class Contact
     @@contacts.clear
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def all_info
-    return "Name: #{@first_name} #{@last_name} \nEmail: #{@email} \nNotes: #{@notes}"
+    return "Name: #{full_name} \nEmail: #{@email} \nNotes: #{@notes}"
   end
 
   # This method should delete the contact
