@@ -21,7 +21,7 @@ class CRM
     puts '[4] Display all the contacts'
     puts '[5] Search by attribute'
     puts '[6] Exit'
-    puts 'Enter a number: '
+    print 'Enter a number: '
   end
 
   def call_option(user_selected)
@@ -56,17 +56,27 @@ class CRM
   end
 
   def modify_existing_contact
-    print "Select contact you wish to change."
-    contact = gets.chomp
+    # find contact by name
+    print "Type contact name you wish to change: "
+    contact_name = gets.chomp
+    contact = Contact.find_by(contact_name)
 
-    Contact.find_by(contact)
-
+    # shows the menu
+    puts "What attribute would you like to modify for this contact?"
     puts '[1] First name'
     puts '[2] Last name'
     puts '[3] Email'
-    puts '[4] Notes'
-    puts 'Enter a number: '
+    puts '[4] Note'
+    puts '[0] Exit'
+    print "Enter attribute number: "
+    attribute_number = gets.to_i
 
+    # make sure user didn't press exit
+    if attribute_number != 0
+      print "What would you like to change it to? "
+      user_input = gets.chomp
+      contact.update(attribute_number, user_input)
+    end
   end
 
   def delete_contact

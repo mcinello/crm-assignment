@@ -88,13 +88,13 @@ class Contact
   # 2. the new value for that attribute
   # and then make the appropriate change to the contact
   def update(attribute, new_value)
-    if attribute == @first_name
+    if attribute == 1
       @first_name = new_value
-    elsif attribute == @last_name
+    elsif attribute == 2
       @last_name = new_value
-    elsif attribute == @email
+    elsif attribute == 3
       @email = new_value
-    elsif attribute == @note
+    elsif attribute == 4
       @note = new_value
     end
   end
@@ -109,6 +109,7 @@ class Contact
       if contact.first_name == f_name || contact.last_name == l_name
         puts contact.all_info
         found_contact = true
+        return contact
       end
     end
     if !found_contact
