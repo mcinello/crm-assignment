@@ -104,11 +104,11 @@ class CRM
 
 end
 
-at_exit do
-  ActiveRecord::Base.connection.close
-end
-
 a_crm_app = CRM.new
 a_crm_app.main_menu
 
 a_crm_app.print_main_menu
+
+at_exit do
+  ActiveRecord::Base.connection.close
+end
