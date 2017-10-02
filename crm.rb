@@ -97,13 +97,14 @@ class CRM
     Contact.find_by(contact_attribute)
   end
 
-
 end
-
-
-
 
 a_crm_app = CRM.new
 a_crm_app.main_menu
 
 a_crm_app.print_main_menu
+
+
+at_exit do
+  ActiveRecord::Base.connection.close
+end

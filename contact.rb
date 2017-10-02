@@ -1,4 +1,4 @@
-gem 'activerecord', '=4.2.7'
+gem 'activerecord', '=4.1.9'
 require 'active_record'
 require 'mini_record'
 
@@ -6,10 +6,14 @@ ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'crm.sqlit
 
 class Contact < ActiveRecord::Base
 
-field :first_name, as: :string
-field :last_name,  as: :string
-field :email,      as: :string
-field :note,       as: :text
+  field :first_name, as: :string
+  field :last_name,  as: :string
+  field :email,      as: :string
+  field :note,       as: :text
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 
   @@contacts = []
   @@id = 1
@@ -95,10 +99,6 @@ field :note,       as: :text
     @@contacts.clear
   end
 
-  def full_name
-    "#{first_name} #{last_name}"
-  end
-
   def all_info
     return "Name: #{full_name} \nEmail: #{@email} \nNotes: #{@notes}"
   end
@@ -112,6 +112,7 @@ field :note,       as: :text
   # Feel free to add other methods here, if you need them.
 end
 
+Contact.auto_upgrade!
 
 
 michelle_cinello = Contact.create('Michelle', 'Cinello', 'm.cinello@gmail.com')
