@@ -63,12 +63,11 @@ class CRM
   end
 
   def modify_existing_contact # fix
-    # find contact by name
-    print "Type contact name you wish to change: "
-    contact_name = gets.chomp
-    contact = Contact.find_by(contact_name)
-
-    # shows the menu
+    #find contact by name
+    print "Type ID of contact you wish to change: "
+    id = gets.chomp
+    contact = Contact.find(id)
+    # # # shows the menu
     puts "What attribute would you like to modify for this contact?"
     puts '[1] First name'
     puts '[2] Last name'
@@ -76,13 +75,26 @@ class CRM
     puts '[4] Note'
     puts '[0] Exit'
     print "Enter attribute number: "
-    attribute_number = gets.to_i
-
-    # make sure user didn't press exit
-    if attribute_number != 0
-      print "What would you like to change it to? "
-      user_input = gets.chomp
+    attribute = gets.to_i
+    # #
+    # # # make sure user didn't press exit
+    if attribute != 0
+      puts "What would you like to change about #{contact.full_name}?"
+      new_value = gets.chomp
     end
+    # #
+
+      if attribute == 1
+        contact.update_attributes(first_name: new_value)
+      elsif attribute == 2
+        contact.update_attributes(last_name: new_value)
+      elsif attribute == 3
+        contact.update_attributes(email: new_value)
+      elsif attribute == 4
+        contact.update_attributes(note: new_value)
+      end
+      return new_value
+
   end
 
   def delete_contact # works
@@ -97,19 +109,14 @@ class CRM
     puts Contact.all.inspect
   end
 
-  def search_by_attribute
+  def search_by_attribute #works
     puts "Search contact by first name, last name, or email:"
     value = gets.chomp
 
     contact = Contact.find_by(first_name: value) || Contact.find_by(last_name: value) || Contact.find_by(email: value)
+    puts
     puts "#{contact.full_name} \n#{contact.email} \n#{contact.note}"
-
-    # puts "How would you like to search for the contact? (first_name, last_name, email): "
-    # attribute = gets.chomp
-    # puts "What's the #{attribute}?"
-    # value = gets.chomp
-    #
-    # print Contact.find_by(attribute => value)
+    puts
   end
 
 end
