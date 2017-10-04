@@ -1,3 +1,5 @@
+require 'pry'
+
 require_relative 'contact'
 
 class CRM
@@ -60,7 +62,7 @@ class CRM
 
   end
 
-  def modify_existing_contact
+  def modify_existing_contact # fix
     # find contact by name
     print "Type contact name you wish to change: "
     contact_name = gets.chomp
@@ -80,26 +82,34 @@ class CRM
     if attribute_number != 0
       print "What would you like to change it to? "
       user_input = gets.chomp
-      contact.update(attribute_number, user_input)
     end
   end
 
-  def delete_contact
-    print "Type id of person you'd like to remove"
+  def delete_contact # works
+    print "Type id of person want to to remove"
     id = gets.to_i
 
     contact = Contact.find(id)
     contact.delete
   end
 
-  def display_all_contacts
+  def display_all_contacts # works
     puts Contact.all.inspect
   end
 
   def search_by_attribute
-    print "Type in the first name, last name, or email of contact: "
-    contact_attribute = gets.chomp
-    Contact.find_by(contact_attribute)
+    puts "Search contact by first name, last name, or email:"
+    value = gets.chomp
+
+    contact = Contact.find_by(first_name: value) || Contact.find_by(last_name: value) || Contact.find_by(email: value)
+    puts "#{contact.full_name} \n#{contact.email} \n#{contact.note}"
+
+    # puts "How would you like to search for the contact? (first_name, last_name, email): "
+    # attribute = gets.chomp
+    # puts "What's the #{attribute}?"
+    # value = gets.chomp
+    #
+    # print Contact.find_by(attribute => value)
   end
 
 end
